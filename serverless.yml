@@ -9,7 +9,7 @@ provider:
   region: ap-south-1
 
 functions:
-  pre-prod-titan-rs-homescreen:
+  poc:
     handler: handler.homescreen
     url: true
     events:
