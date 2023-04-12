@@ -1,4 +1,4 @@
-name: AWS Lambda Deployment
+name: AWS Lambda
 on: [push]
 jobs:
   deploy_source:
@@ -23,11 +23,19 @@ jobs:
         uses: montudor/action-zip@v0.1.0
         with:
           args: zip -qq -r ./bundle.zip ./
-      - name: default deploy
+      - name: poc deployment
         uses: appleboy/lambda-action@master
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: eu-west-1
+          aws_region: us-east-1
           function_name: poc
+          zip_file: bundle.zip
+      - name: homescreen deployment
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: us-east-1
+          function_name: sit_homescreen
           zip_file: bundle.zip
