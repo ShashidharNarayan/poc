@@ -19,27 +19,24 @@ jobs:
           npm run build --if-present
         env:
           CI: true
-      - name: zip
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -r ./poc.zip ./
-      - name: poc deployment
-        uses: appleboy/lambda-action@master
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: us-east-1
-          function_name: poc
-          zip_file: poc.zip
-      - name: zip
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -qq -r ./homescreen.zip homescreen
-      - name: homescreen deployment
-        uses: appleboy/lambda-action@master
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: us-east-1
-          function_name: sit_homescreen
-          zip_file: homescreen.zip
+      - name: "Installing, and Deploying Function"
+        run: |
+          pwd
+          for fun in poc ; do
+            echo ${fun}
+            cd ${fun}
+            if [[ -f "index.js" ]]; then
+              echo "Creating Zip"
+              zip -j deploy.zip ./*
+              echo "Deploying Lambda"
+              aws lambda update-function-code --function-name=${fun} --zip-file=fileb://deploy.zip
+              echo "${fun} Deployed."
+            fi
+            cd ..
+          done
