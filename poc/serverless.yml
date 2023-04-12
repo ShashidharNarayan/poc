@@ -1,0 +1,66 @@
+service: tanishq
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: pre-prod
+  region: ap-south-1
+
+functions:
+  poc:
+    handler: handler.homescreen
+    url: true
+    events:
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.SPLASHSCREEN_ESPOT_POLICIES}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.SPLASHSCREEN_STORE_SUPPORTED_CURRENCIES}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.SPLASHSCREEN_LOG}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.SPLASHSCREEN_LOGIN_METHOD}
+      - httpApi:
+          method: post
+          path: ${file("./constants.js"):PATH.SPLASHSCREEN_VISITOR_ID}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.SPLASHSCREEN_CONFIG}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.HOMESCREEN}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.HOMESCREEN_SLOT_DETAILS}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.PDP_PROMISES_LOG}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.HOME_LANDING_PAGE} 
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.GOLD_RATE} 
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.EMI_DETAILS}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.STORE_LOCATOR_SUGGEST_CITY}
+      - httpApi:
+          method: get
+          path: ${file("./constants.js"):PATH.STORE_LOCATOR_SEARCH_STORES}
+      - httpApi:
+          method: post
+          path: ${file("./constants.js"):PATH.PRODUCT_MGMT_LOADESPOT}
+          
+          
+        
+          
+  
+
