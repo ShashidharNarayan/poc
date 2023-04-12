@@ -22,7 +22,8 @@ jobs:
       - name: zip
         uses: montudor/action-zip@v0.1.0
         with:
-          run: cd homescreen; zip -r ./poc.zip *
+          entryPoint: cd homescreen
+          args: zip -qq -r ./poc.zip *
       - name: poc deployment
         uses: appleboy/lambda-action@master
         with:
