@@ -22,8 +22,8 @@ jobs:
       - name: zip
         uses: montudor/action-zip@v0.1.0
         with:
-          entryPoint: cd homescreen
-          args: zip -qq -r ./poc.zip *
+          run: cd homescreen; zip -r ../poc.zip * aws lambda update-function-code --function-name=${fun} --zip-file=fileb://poc.zip fi cd.. done
+          
       - name: poc deployment
         uses: appleboy/lambda-action@master
         with:
@@ -31,7 +31,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: us-east-1
           function_name: poc
-          zip_file: poc.zip
+          
       - name: zip
         uses: montudor/action-zip@v0.1.0
         with:
