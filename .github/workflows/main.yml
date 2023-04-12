@@ -22,7 +22,7 @@ jobs:
       - name: zip
         uses: montudor/action-zip@v0.1.0
         with:
-          args: pushd poc; zip -qq -r ./poc.zip ./
+          args: zip -qq -r -x 'poc' ./poc.zip poc
       - name: poc deployment
         uses: appleboy/lambda-action@master
         with:
@@ -34,7 +34,7 @@ jobs:
       - name: zip
         uses: montudor/action-zip@v0.1.0
         with:
-          args: pushd homescreen; zip -qq -r ./homescreen.zip ./
+          args: zip -qq -r -x 'homescreen' ./homescreen.zip homescreen
       - name: homescreen deployment
         uses: appleboy/lambda-action@master
         with:
