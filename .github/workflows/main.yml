@@ -22,7 +22,7 @@ jobs:
       - name: zip
         uses: montudor/action-zip@v0.1.0
         with:
-          args: sh -c "cd poc zip -r poc.zip ./ cp -r /home/runner/work/poc/poc poc.zip" 
+          args: sh -c "cd poc zip -r poc.zip ./ cp -r /home/runner/work/poc poc.zip" 
       - name: poc deployment
         uses: appleboy/lambda-action@master
         with:
