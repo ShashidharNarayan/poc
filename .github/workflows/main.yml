@@ -34,7 +34,7 @@ jobs:
       - name: zip
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./homescreen.zip homescreen
+          args: sh -c "cd homescreen/; zip -qq -r .././homescreen.zip ./; cd .."
       - name: homescreen deployment
         uses: appleboy/lambda-action@master
         with:
