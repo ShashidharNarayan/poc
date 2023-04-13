@@ -22,7 +22,7 @@ jobs:
       - name: zip 
         uses: montudor/action-zip@v0.1.0
         with:
-          args: sh -c "for poc in ./* ;do if [[ -d $dir ]];then zip -r ${dir}.zip $dir fi done"
+          args: sh -c "find . -type d -maxdepth 1 -exec zip -r {}.zip {} \;"
       - name: poc deployment
         uses: appleboy/lambda-action@master
         with:
