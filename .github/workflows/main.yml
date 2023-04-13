@@ -22,7 +22,7 @@ jobs:
       - name: zip
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./poc.zip serverless.yml handler.js services/
+          args: cd homescreen/services zip -qq -r ./poc.zip serverless.yml handler.js
       - name: poc deployment
         uses: appleboy/lambda-action@master
         with:
